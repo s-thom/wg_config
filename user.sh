@@ -143,22 +143,51 @@ del_user() {
     sort ${AVAILABLE_IP_FILE} --version-sort -o ${AVAILABLE_IP_FILE}
 }
 
+append_keepalive() {
+    local source_peer=$1
+    local destination=$2
+    keepalive_line=`grep PersistentKeepalive "$source_peer"`
+    if [ ! -z "$keepalive_line" ];
+    then
+        echo "$keepalive_line" >> "$destination"
+    fi
+}
+
+generate_peers() {
+    local peers_file=$1
+    while read user vpn_ip public_key; do
+      ip=${vpn_ip%/*}/32
+        cat >> $peers_file <<EOF
+[Peer]
+# $user
+PublicKey = $public_key
+AllowedIPs = $ip
+EOF
+        local source_peer="users/$user/client.all.conf"
+        append_keepalive "$source_peer" "$peers_file"
+        echo "" >> "$peers_file"
+    done < ${SAVED_FILE}
+}
+
 generate_and_install_server_config_file() {
     local template_file=${SERVER_TPL_FILE}
     local ip
 
     # server config file
     eval "echo \"$(cat "${template_file}")\"" > $WG_TMP_CONF_FILE
-    while read user vpn_ip public_key; do
-      ip=${vpn_ip%/*}/32
-      cat >> $WG_TMP_CONF_FILE <<EOF
-[Peer]
-# $user
-PublicKey = $public_key
-AllowedIPs = $ip
-EOF
-    done < ${SAVED_FILE}
+    if [ x"$_USE_COMMON_PEERS_CONF" != "x0" ];
+    then
+        local peers_dest="$PEERS_TMP_CONF_FILE"
+        rm -f "$peers_dest"
+    else
+        local peers_dest="$WG_TMP_CONF_FILE"
+    fi
+    generate_peers "$peers_dest"
     \cp -f $WG_TMP_CONF_FILE $WG_CONF_FILE
+    if [ "$peers_dest" != "$WG_TMP_CONF_FILE" ];
+    then
+        \cp -f "$peers_dest" "$PEERS_CONF_FILE"
+    fi
 }
 
 do_clear() {
