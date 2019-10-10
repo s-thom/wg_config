@@ -60,7 +60,7 @@ add_user() {
     local template_file=${CLIENT_TPL_FILE}
     local interface=${_INTERFACE}
     local userdir="users/$user"
-
+    local keepalive_val=0
     if [ ! -d "$userdir" ]
     then
 
@@ -84,10 +84,18 @@ add_user() {
 
      qrencode -o $userdir/$user.all.png  < $userdir/client.all.conf
      
+    local keepalive_line=$(grep PersistentKeepalive "$userdir/client.all.conf")
+    echo $keepalive_line
+    if [ ! -z "$keepalive_line" ];
+    then
+        keepalive_val=$(echo "$keepalive_line" | sed -r "s/.*=\ //g")
+    fi
+
      # change wg config
      local ip=${_VPN_IP%/*}/32
      local public_key=`cat $userdir/publickey`
-     wg set $interface peer $public_key allowed-ips $ip
+     wg set $interface peer $public_key allowed-ips $ip persistent-keepalive $keepalive_val
+
      if [[ $? -ne 0 ]]; then
        echo "wg set failed"
        rm -rf $user
