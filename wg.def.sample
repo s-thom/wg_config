@@ -4,4 +4,5 @@ _SERVER_PORT=51820
 _SERVER_LISTEN=wg.example.com:$_SERVER_PORT
 _SERVER_PUBLIC_KEY=
 _SERVER_PRIVATE_KEY=
+# Be sure to use a PostUp hook to source peers.conf
 _USE_COMMON_PEERS_CONF=0
