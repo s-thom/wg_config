@@ -9,6 +9,8 @@ SAVED_FILE=.saved
 AVAILABLE_IP_FILE=.available_ip
 WG_TMP_CONF_FILE=.$_INTERFACE.conf
 WG_CONF_FILE="/etc/wireguard/$_INTERFACE.conf"
+PEERS_TMP_CONF_FILE=".peers.conf"
+PEERS_CONF_FILE="/etc/wireguard/peers.conf"
 
 dec2ip() {
     local delim=''
