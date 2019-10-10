@@ -143,6 +143,7 @@ generate_and_install_server_config_file() {
       ip=${vpn_ip%/*}/32
       cat >> $WG_TMP_CONF_FILE <<EOF
 [Peer]
+# $user
 PublicKey = $public_key
 AllowedIPs = $ip
 EOF
