@@ -17,6 +17,19 @@ Configuration is done in `wg.def`. A `wg.def.sample` file is provided in this re
 
 You can generate the public key and private key with command `wg genkey | tee > prikey | wg pubkey > pubkey`.
 
+| Variable                | Description                                                     |
+| ----------------------- | --------------------------------------------------------------- |
+| \_INTERFACE             | Name of the WireGuard interface                                 |
+| \_OUTBOUND_INTERFACE    | Network interface to send outbound traffic to (probably `eth0`) |
+| \_VPN_NET               | Network to be used by WireGuard in CIDR notation                |
+| \_DNS_SERVERS           | DNS servers clients will use                                    |
+| \_KEEPALIVE             | Keepalive duration (seconds)                                    |
+| \_SERVER_PORT           | Post WireGuard will listen on                                   |
+| \_SERVER_LISTEN         | Where clients will connect to                                   |
+| \_SERVER_PUBLIC_KEY     | Public key of the WireGuard interface                           |
+| \_SERVER_PRIVATE_KEY    | Private key of the WireGuard interface                          |
+| \_USE_COMMON_PEERS_CONF | If not set to `0`, all peer configuration end up in one file    |
+
 ## Usage
 
 All commands must be run as root (use `sudo` is logged in as a non-root user).
