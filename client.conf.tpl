@@ -7,4 +7,4 @@ DNS = $_DNS_SERVERS
 PublicKey = $_SERVER_PUBLIC_KEY
 AllowedIPs = $_VPN_NET
 Endpoint = $_SERVER_LISTEN
-PersistentKeepalive = 25
+PersistentKeepalive = $_KEEPALIVE

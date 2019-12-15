@@ -158,8 +158,9 @@ generate_peers() {
     while read user vpn_ip public_key; do
       ip=${vpn_ip%/*}/32
         cat >> $peers_file <<EOF
-[Peer]
+
 # $user
+[Peer]
 PublicKey = $public_key
 AllowedIPs = $ip
 EOF
