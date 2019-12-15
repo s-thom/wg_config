@@ -77,15 +77,15 @@ add_user() {
          exit 1
      fi
      eval "echo \"$(cat "${template_file}")\"" > $userdir/client.conf
-     
+
      eval "echo \"$(cat "${template_file}")\"" > $userdir/client.all.conf
      sed -r "s/AllowedIPs.*/AllowedIPs = 0.0.0.0\/0/g" -i $userdir/client.all.conf
-     
+
      qrencode -t ansiutf8  < $userdir/client.conf
      qrencode -o $userdir/$user.png  < $userdir/client.conf
 
      qrencode -o $userdir/$user.all.png  < $userdir/client.all.conf
-     
+
     local keepalive_line=$(grep PersistentKeepalive "$userdir/client.all.conf")
     echo $keepalive_line
     if [ ! -z "$keepalive_line" ];
@@ -105,7 +105,7 @@ add_user() {
      fi
 
      echo "$user $_VPN_IP $public_key" >> ${SAVED_FILE}
-    
+
     else
      echo "$user already exists." 1>&2
      echo
@@ -139,7 +139,7 @@ del_user() {
         echo "$ip" >> ${AVAILABLE_IP_FILE}
     fi
     rm -rf $userdir
-    
+
     sort ${AVAILABLE_IP_FILE} --version-sort -o ${AVAILABLE_IP_FILE}
 }
 
@@ -267,7 +267,7 @@ if [[ $action == "-c" ]]; then
         echo "Exiting."
     fi
 elif [[ $action == "-v" ]]; then
-    view_user $user   
+    view_user $user
 elif [[ $action == "-g" ]]; then
     generate_cidr_ip_file_if
 elif [[ ! -z "$user" && ( $action == "-a" || $action == "-d" ) ]]; then
