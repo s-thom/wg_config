@@ -4,5 +4,5 @@ PrivateKey = $_PRIVATE_KEY
 
 [Peer]
 PublicKey = $_SERVER_PUBLIC_KEY
-AllowedIPs = 0.0.0.0/0
+AllowedIPs = $_VPN_NET
 Endpoint = $_SERVER_LISTEN
