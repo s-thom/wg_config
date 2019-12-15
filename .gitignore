@@ -1,1 +1,4 @@
 *.def
+.saved
+.available_ip
+.*.conf
