@@ -1,41 +1,35 @@
-**This is a part of project:**
+# wg_config
 
-https://github.com/adrianmihalko/raspberrypiwireguard
+A simple WireGuard user management script for use on the VPN server. It can generate client configuration files and QR codes (with `qrencode`).
 
-Be sure to read this first.
+History lesson: this project is forked from [zcutlip/wg_config](https://github.com/zcutlip/wg_config), which is forked from [adrianmihalko/wg_config](https://github.com/adrianmihalko/wg_config) (as part of [adrianmihalko/raspberrypiwireguard](https://github.com/adrianmihalko/raspberrypiwireguard)), which is forked from [faicker/wg-config](https://github.com/faicker/wg-config).
 
+## Dependencies
 
-##############################################################################
+- wireguard
+- qrencode
 
+## Configuration
 
+The script assumes the WireGuard directory is `/etc/wireguard`.
 
+Configuration is done in `wg.def`. A `wg.def.sample` file is provided in this repository.
 
-This is a simple wireguard VPN user management script using on VPN server.
-Client config file and qrcode are generated.
-
-
-
-### dependency
-
-* wireguard
-* qrencode
-
-### config
-The wireguard default config directory is /etc/wireguard.
-The script config file is wg.def, create and edit it according to wg.def.sample.
 You can generate the public key and private key with command `wg genkey | tee > prikey | wg pubkey > pubkey`.
 
-### usage
+## Usage
 
-Running as root.
+All commands must be run as root (use `sudo` is logged in as a non-root user).
 
-#### start wireguard
+### Start WireGuard
+
+This script does not automatically start WireGuard on first run, you must do that yourself.
 
 ```bash
 wg-quick up wg0
 ```
 
-#### add a user
+### Add a user
 
 ```bash
 ./user.sh -a alice
@@ -49,6 +43,7 @@ and add alice to the wg config.
 ```bash
 ./user.sh -d alice
 ```
+
 This will delete the alice directory and delete alice from the wg config.
 
 #### view a user
@@ -56,8 +51,8 @@ This will delete the alice directory and delete alice from the wg config.
 ```bash
 ./user.sh -v alice
 ```
-This will show generated QR codes.
 
+This will show generated QR codes.
 
 #### clear all
 
