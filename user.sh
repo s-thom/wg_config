@@ -273,6 +273,7 @@ elif [[ $action == "-v" ]]; then
 elif [[ $action == "-g" ]]; then
     generate_cidr_ip_file_if
 elif [[ $action == "-i" ]]; then
+    generate_cidr_ip_file_if
     generate_and_install_server_config_file
 elif [[ ! -z "$user" && ( $action == "-a" || $action == "-d" ) ]]; then
     do_user
