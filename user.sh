@@ -240,12 +240,13 @@ view_user() {
 }
 
 usage() {
-    echo "usage: $0 [-a|-d|-c|-v] [username]"
+    echo "usage: $0 [-a|-d|-c|-v|-i] [username]"
     echo
     echo "       -a [username]                              add user"
     echo "       -d [username]                           delete user"
     echo "       -c               delete all users and configuration"
     echo "       -v [username]      view generated QR codes for user"
+    echo "       -i                     install server configuration"
     echo
 
 }
@@ -271,6 +272,8 @@ elif [[ $action == "-v" ]]; then
     view_user $user
 elif [[ $action == "-g" ]]; then
     generate_cidr_ip_file_if
+elif [[ $action == "-i" ]]; then
+    generate_and_install_server_config_file
 elif [[ ! -z "$user" && ( $action == "-a" || $action == "-d" ) ]]; then
     do_user
 else

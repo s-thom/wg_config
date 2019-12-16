@@ -74,6 +74,14 @@ Clear everything to start again
 ./user.sh -c
 ```
 
+### Install server configuration
+
+Generates the server's configuration and copies it to `/etc/wireguard`. Does not change anything on the running WireGuard interface itself, it only copies the configuration.
+
+```bash
+./user.sh -i
+```
+
 ### Generate available IPs
 
 Generates the `.available_ip` file. You do not need to run this yourself.
