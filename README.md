@@ -4,6 +4,8 @@ A simple WireGuard user management script for use on the VPN server. It can gene
 
 History lesson: this project is forked from [zcutlip/wg_config](https://github.com/zcutlip/wg_config), which is forked from [adrianmihalko/wg_config](https://github.com/adrianmihalko/wg_config) (as part of [adrianmihalko/raspberrypiwireguard](https://github.com/adrianmihalko/raspberrypiwireguard)), which is forked from [faicker/wg-config](https://github.com/faicker/wg-config).
 
+_Pull requests are welcome._ So many of these forks are stale, and there's not much indication of whether PRs are encouraged. Some forks have deviated from the original quite a lot, making PRs an absolute hassle.
+
 ## Dependencies
 
 -   wireguard
